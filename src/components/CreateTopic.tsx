@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState, FunctionComponent } from 'react';
+import { useState, FunctionComponent } from 'react';
 import ITopicDetails from '../interfaces';
 import AutoTextArea from './componentUtils/AutoTextArea';
 
@@ -18,10 +18,9 @@ const CreateTopic: FunctionComponent<ICreateTopic> = ({ createTopic }): JSX.Elem
     createTopic(topicInfo.title, topicInfo.timeEST, topicInfo.description);
     setTopicInfo({ title: '', timeEST: '', description: '' });
   };
-
   return (
     <>
-      <form>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <input
           id="title"
           type="text"
@@ -54,7 +53,12 @@ const CreateTopic: FunctionComponent<ICreateTopic> = ({ createTopic }): JSX.Elem
           }}
           required
         ></textarea> */}
-        <AutoTextArea />
+        <AutoTextArea
+          onChange={(e) => {
+            setTopicInfo((x) => ({ ...x, description: e.target.value }));
+          }}
+        />
+        <button type="submit">Submit</button>
       </form>
     </>
   );
