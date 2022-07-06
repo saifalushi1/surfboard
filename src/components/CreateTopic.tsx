@@ -1,5 +1,5 @@
 import { useState, FunctionComponent } from 'react';
-import ITopicDetails from '../interfaces';
+import { ITopicDetails } from '../interfaces';
 import AutoTextArea from './componentUtils/AutoTextArea';
 
 interface ICreateTopic {

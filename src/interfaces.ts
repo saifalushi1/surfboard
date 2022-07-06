@@ -1,13 +1,12 @@
-interface ITopicDetails {
+export interface ITopicDetails {
   title: string;
   timeEST: string;
   description: string;
 }
 
-interface IMeetingDetails {
+export interface IMeetingDetails {
   title: string;
-  date: string;
-  length: string;
+  date: Date;
+  startTime: string;
+  endTime: string;
 }
-
-export default ITopicDetails;
