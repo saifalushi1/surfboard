@@ -44,19 +44,13 @@ const CreateTopic: FunctionComponent<ICreateTopic> = ({ createTopic }): JSX.Elem
           pattern="\d+"
           required
         />
-        {/* <textarea
-          id="title"
-          placeholder="Enter A Description"
-          value={topicInfo.description}
-          onChange={(e) => {
-            setTopicInfo((x) => ({ ...x, description: e.target.value }));
-          }}
-          required
-        ></textarea> */}
+
         <AutoTextArea
           onChange={(e) => {
             setTopicInfo((x) => ({ ...x, description: e.target.value }));
           }}
+          value={topicInfo.description}
+          placeholder="Enter a Description"
         />
         <button type="submit">Submit</button>
       </form>

@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import setHours from 'date-fns/setHours';
+import format from 'date-fns/format';
 import setMinutes from 'date-fns/setMinutes';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-const CreateMeeting = (): JSX.Element => {
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [startTime, setStartTime] = useState<Date>();
-  const [endTime, setEndTime] = useState<Date>();
+interface ICreateMeeting {
+  createMeeting: (title: string, date: string, startTime: string, endTime: string) => void;
+}
 
-  console.log(startDate);
+const CreateMeeting: FunctionComponent<ICreateMeeting> = ({ createMeeting }): JSX.Element => {
+  const [title, setTitle] = useState<string>('');
+  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [startTime, setStartTime] = useState<Date>(new Date());
+  const [endTime, setEndTime] = useState<Date>(new Date());
+
+  const meetingInfo: [n: string, x: string, y: string, z: string] = [
+    title,
+    format(startDate, 'MMM-dd-yyyy'),
+    format(startTime, 'k:m'),
+    format(endTime, 'k:m')
+  ];
 
   const isWeekday = (date: any) => {
     const day = date.getDay(date);
@@ -19,6 +30,9 @@ const CreateMeeting = (): JSX.Element => {
 
   return (
     <>
+      <input type="text" placeholder="Meeting Name" onChange={(e) => setTitle(e.target.value)} />
+      <br />
+      Day:
       <DatePicker
         selected={startDate}
         onChange={(date: Date) => setStartDate(date)}
@@ -26,8 +40,7 @@ const CreateMeeting = (): JSX.Element => {
         filterDate={isWeekday}
         dateFormat="yyyy/MM/dd"
       />
-
-      {/* start Time */}
+      Start Time:
       <DatePicker
         selected={startTime}
         onChange={(startTime: Date) => setStartTime(startTime)}
@@ -39,19 +52,20 @@ const CreateMeeting = (): JSX.Element => {
         timeCaption="Time"
         dateFormat="h:mm aa"
       />
-      {/* end Time */}
+      End Time:
       <DatePicker
-        selected={startTime}
-        onChange={(endTime: Date) => setStartDate(endTime)}
+        selected={endTime}
+        onChange={(endTime: Date) => setEndTime(endTime)}
         showTimeSelect
         showTimeSelectOnly
         timeIntervals={30}
         //link this to start time sthey cant pick the same end time
-        // minTime={setHours(setMinutes(new Date(), 0), parseInt(startTime))}
+        minTime={setHours(setMinutes(new Date(), 0), 8)}
         maxTime={setHours(setMinutes(new Date(), 30), 17)}
         timeCaption="Time"
         dateFormat="h:mm aa"
       />
+      <button onClick={() => createMeeting(...meetingInfo)}>Create Meeting</button>
     </>
   );
 };

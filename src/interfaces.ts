@@ -6,7 +6,7 @@ export interface ITopicDetails {
 
 export interface IMeetingDetails {
   title: string;
-  date: Date;
+  date: string;
   startTime: string;
   endTime: string;
 }

@@ -1,14 +1,13 @@
 import React from 'react';
 import './App.css';
-import CreateMeeting from './components/CreateMeeting';
-import CreateTopic from './components/CreateTopic';
+import Meeting from './components/Meeting';
 import Topic from './components/Topic';
 
 const App = () => {
   return (
     <div className="App">
+      <Meeting />
       <Topic />
-      <CreateMeeting />
     </div>
   );
 };
