@@ -30,8 +30,9 @@ const Topic: FC<meetingParams> = ({ meetingId }): JSX.Element => {
   const showTopics = topics.map((item, index) => {
     if (item.meetingId === parseInt(meetingId)) {
       return (
-        <div key={index}>
+        <div key={index} className="topic">
           <h4>{item.title}</h4>
+          <button onClick={() => topics.filter((x) => x === item)}>Delete</button>
           <br />
           <span>Time EST: {item.timeEST}</span>
           <br />
@@ -41,10 +42,19 @@ const Topic: FC<meetingParams> = ({ meetingId }): JSX.Element => {
     }
   });
 
+  const noTopics = () => {
+    return (
+      <>
+        <h3>You currently have no Topics</h3>
+        <span>You can create one using the Create New Topics Button</span>
+      </>
+    );
+  };
+
   return (
     <>
+      {topics.length === 0 ? noTopics() : null}
       {showTopics}
-
       {isOpen && (
         <>
           <div className="overlay"></div>

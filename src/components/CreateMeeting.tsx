@@ -33,15 +33,6 @@ const CreateMeeting: FunctionComponent<ICreateMeeting> = ({
     return day !== 0 && day !== 6;
   };
 
-  useEffect(() => {
-    const blah = [...x];
-    blah.map((item) => {
-      item.test;
-    });
-    console.log(blah);
-    // setX((x) => [...x]);
-  }, []);
-
   return (
     <>
       <input type="text" placeholder="Meeting Name" onChange={(e) => setTitle(e.target.value)} />

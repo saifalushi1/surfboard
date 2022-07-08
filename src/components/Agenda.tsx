@@ -30,8 +30,14 @@ const Agenda = (): JSX.Element => {
   const showMeetings = meetings.map((item, index): JSX.Element => {
     return (
       <Link to={`meeting/${index}`} key={index}>
-        <div key={index} className={`${index} ajshdahsdjk`}>
-          <h4>{item.title}</h4>
+        <div key={index} className={'meeting'}>
+          <h4>{item.title}</h4>{' '}
+          <button
+            onClick={() => {
+              meetings.filter((x) => x === item);
+            }}>
+            Delete
+          </button>
           <br />
           <span>Date: {item.date}</span>
           <br />
@@ -43,7 +49,7 @@ const Agenda = (): JSX.Element => {
     );
   });
 
-  const noMeetings = () => {
+  const noMeetings = (): JSX.Element => {
     return (
       <>
         <h3>You currently have no meetings</h3>
@@ -52,9 +58,12 @@ const Agenda = (): JSX.Element => {
     );
   };
 
+  console.log(meetings.length);
+
   return (
     <>
-      {!meetings ? noMeetings : showMeetings}
+      {meetings.length === 0 ? noMeetings() : null}
+      {showMeetings}
       {isOpen && (
         <>
           <div className="overlay"></div>

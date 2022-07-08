@@ -1,8 +1,3 @@
-.App {
-  width: 90%;
-  padding: 50px;
-}
-
 textarea {
   resize: none;
 }
@@ -63,4 +58,16 @@ textarea {
 
 .button:hover {
   background: orange;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #ccc;
+}
+.meeting {
+  background: wheat;
+}
+.topic {
+  background: wheat;
 }
