@@ -2,6 +2,7 @@ export interface ITopicDetails {
   title: string;
   timeEST: string;
   description: string;
+  meetingId: number;
 }
 
 export interface IMeetingDetails {

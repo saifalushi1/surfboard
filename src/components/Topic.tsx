@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import React, { FC, useState } from 'react';
 import CreateTopic from './CreateTopic';
 import { ITopicDetails } from '../interfaces';
+import { meetingParams } from './Meeting';
+import { useParams } from 'react-router-dom';
 
 //im thinking it might be best for Topic.tsx to just be the state holder
 //and show the list of topics with their title, time estimate, and a text description
-const Topic = (): JSX.Element => {
+const Topic: FC<meetingParams> = ({ meetingId }): JSX.Element => {
   const [topics, setTopics] = useState<Array<ITopicDetails>>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const { id } = useParams() as { id: string };
+
   const openModal = (): void => {
     setIsOpen(true);
   };
@@ -19,21 +24,24 @@ const Topic = (): JSX.Element => {
     const temp: ITopicDetails = {
       title: title,
       timeEST: time,
-      description: text
+      description: text,
+      meetingId: parseInt(meetingId)
     };
     setTopics((x) => [...x, temp]);
   };
 
   const showTopics = topics.map((item, index) => {
-    return (
-      <div key={index}>
-        <h4>{item.title}</h4>
-        <br />
-        <span>Time EST: {item.timeEST}</span>
-        <br />
-        <p>{item.description}</p>
-      </div>
-    );
+    if (item.meetingId === parseInt(meetingId)) {
+      return (
+        <div key={index}>
+          <h4>{item.title}</h4>
+          <br />
+          <span>Time EST: {item.timeEST}</span>
+          <br />
+          <p>{item.description}</p>
+        </div>
+      );
+    }
   });
 
   return (
@@ -51,7 +59,7 @@ const Topic = (): JSX.Element => {
               </button>
             </header>
             <main className="modal__main">
-              <CreateTopic createTopic={createTopic} />
+              <CreateTopic createTopic={createTopic} meetingId={parseInt(meetingId)} />
             </main>
           </div>
         </>

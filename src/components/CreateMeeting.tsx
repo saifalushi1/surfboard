@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import setHours from 'date-fns/setHours';
 import format from 'date-fns/format';
@@ -15,6 +15,7 @@ const CreateMeeting: FunctionComponent<ICreateMeeting> = ({ createMeeting }): JS
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [startTime, setStartTime] = useState<Date>(new Date());
   const [endTime, setEndTime] = useState<Date>(new Date());
+  const [x, setX] = useState([{ test: [] }, { test2: [] }, { test3: [] }]);
 
   const meetingInfo: [n: string, x: string, y: string, z: string] = [
     title,
@@ -27,6 +28,15 @@ const CreateMeeting: FunctionComponent<ICreateMeeting> = ({ createMeeting }): JS
     const day = date.getDay(date);
     return day !== 0 && day !== 6;
   };
+
+  useEffect(() => {
+    const blah = [...x];
+    blah.map((item) => {
+      item.test;
+    });
+    console.log(blah);
+    // setX((x) => [...x]);
+  }, []);
 
   return (
     <>

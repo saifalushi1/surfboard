@@ -6,17 +6,23 @@ interface ICreateTopic {
   createTopic: (title: string, time: string, text: string) => void;
 }
 
-const CreateTopic: FunctionComponent<ICreateTopic> = ({ createTopic }): JSX.Element => {
+interface IProps {
+  createTopic: (title: string, time: string, text: string) => void;
+  meetingId: number;
+}
+
+const CreateTopic: FunctionComponent<IProps> = ({ createTopic, meetingId }): JSX.Element => {
   const [topicInfo, setTopicInfo] = useState<ITopicDetails>({
     title: '',
     timeEST: '',
-    description: ''
+    description: '',
+    meetingId: meetingId
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     createTopic(topicInfo.title, topicInfo.timeEST, topicInfo.description);
-    setTopicInfo({ title: '', timeEST: '', description: '' });
+    setTopicInfo({ title: '', timeEST: '', description: '', meetingId: meetingId });
   };
   return (
     <>
