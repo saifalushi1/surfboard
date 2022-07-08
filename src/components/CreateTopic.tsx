@@ -2,16 +2,17 @@ import { useState, FunctionComponent } from 'react';
 import { ITopicDetails } from '../interfaces';
 import AutoTextArea from './componentUtils/AutoTextArea';
 
-interface ICreateTopic {
-  createTopic: (title: string, time: string, text: string) => void;
-}
-
 interface IProps {
   createTopic: (title: string, time: string, text: string) => void;
+  closeModal: () => void;
   meetingId: number;
 }
 
-const CreateTopic: FunctionComponent<IProps> = ({ createTopic, meetingId }): JSX.Element => {
+const CreateTopic: FunctionComponent<IProps> = ({
+  createTopic,
+  meetingId,
+  closeModal
+}): JSX.Element => {
   const [topicInfo, setTopicInfo] = useState<ITopicDetails>({
     title: '',
     timeEST: '',
@@ -23,6 +24,7 @@ const CreateTopic: FunctionComponent<IProps> = ({ createTopic, meetingId }): JSX
     e.preventDefault();
     createTopic(topicInfo.title, topicInfo.timeEST, topicInfo.description);
     setTopicInfo({ title: '', timeEST: '', description: '', meetingId: meetingId });
+    closeModal();
   };
   return (
     <>

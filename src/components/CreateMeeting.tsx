@@ -8,9 +8,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 interface ICreateMeeting {
   createMeeting: (title: string, date: string, startTime: string, endTime: string) => void;
+  closeModal: () => void;
 }
 
-const CreateMeeting: FunctionComponent<ICreateMeeting> = ({ createMeeting }): JSX.Element => {
+const CreateMeeting: FunctionComponent<ICreateMeeting> = ({
+  createMeeting,
+  closeModal
+}): JSX.Element => {
   const [title, setTitle] = useState<string>('');
   const [startDate, setStartDate] = useState<Date>(new Date());
   const [startTime, setStartTime] = useState<Date>(new Date());
@@ -75,7 +79,14 @@ const CreateMeeting: FunctionComponent<ICreateMeeting> = ({ createMeeting }): JS
         timeCaption="Time"
         dateFormat="h:mm aa"
       />
-      <button onClick={() => createMeeting(...meetingInfo)}>Create Meeting</button>
+      <button
+        onClick={() => {
+          createMeeting(...meetingInfo);
+          closeModal();
+        }}
+      >
+        Create Meeting
+      </button>
     </>
   );
 };

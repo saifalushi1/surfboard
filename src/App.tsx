@@ -3,8 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Agenda from './components/Agenda';
 import Meeting from './components/Meeting';
-import TestMe from './components/TestMe';
-import Topic from './components/Topic';
 
 const App = () => {
   return (
@@ -14,7 +12,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Agenda />} />
         <Route path="meeting/:id" element={<Meeting />} />
-        <Route path="test/:id" element={<TestMe />} />
       </Routes>
     </div>
   );

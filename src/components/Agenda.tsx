@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IMeetingDetails } from '../interfaces';
 import CreateMeeting from './CreateMeeting';
@@ -6,7 +6,6 @@ import CreateMeeting from './CreateMeeting';
 //agenda will act as the apps home where you can go to different meetings and then
 // within those meetings contain the topics, etc...
 const Agenda = (): JSX.Element => {
-  const computerSpacesRef = useRef([]);
   const [meetings, setMeetings] = useState<Array<IMeetingDetails>>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const openModal = (): void => {
@@ -28,16 +27,10 @@ const Agenda = (): JSX.Element => {
     setMeetings((x) => [...x, temp]);
   };
 
-  const showMeetings = meetings.map((item, index) => {
+  const showMeetings = meetings.map((item, index): JSX.Element => {
     return (
       <Link to={`meeting/${index}`} key={index}>
-        <div
-          key={index}
-          className={`${index} ajshdahsdjk`}
-          // ref={(element) => {
-          //   // computerSpacesRef.current[index] = element;
-          // }}
-        >
+        <div key={index} className={`${index} ajshdahsdjk`}>
           <h4>{item.title}</h4>
           <br />
           <span>Date: {item.date}</span>
@@ -51,7 +44,12 @@ const Agenda = (): JSX.Element => {
   });
 
   const noMeetings = () => {
-    return <h3>You currently have no meetings</h3>;
+    return (
+      <>
+        <h3>You currently have no meetings</h3>
+        <span>You can create one using the Create New Meeting Button</span>
+      </>
+    );
   };
 
   return (
@@ -68,7 +66,7 @@ const Agenda = (): JSX.Element => {
               </button>
             </header>
             <main className="modal__main">
-              <CreateMeeting createMeeting={createMeeting} />
+              <CreateMeeting createMeeting={createMeeting} closeModal={closeModal} />
             </main>
           </div>
         </>
@@ -78,10 +76,6 @@ const Agenda = (): JSX.Element => {
       <button className="button" onClick={openModal}>
         Open Modal
       </button>
-
-      <Link to="test/1">
-        <button>TEST ROUTE 1</button>
-      </Link>
     </>
   );
 };

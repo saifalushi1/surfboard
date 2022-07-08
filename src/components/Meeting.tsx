@@ -1,7 +1,4 @@
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { IMeetingDetails } from '../interfaces';
-import CreateMeeting from './CreateMeeting';
 import Topic from './Topic';
 
 export type meetingParams = {
